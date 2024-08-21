@@ -7,7 +7,7 @@ import java.util.UUID;
 @Entity
 public class Location {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     private String nome;
@@ -23,7 +23,7 @@ public class Location {
         this.evento = evento;
     }
 
-    //---------------costruttore vuoto-----------------
+    // Default constructor
     public Location() {
     }
 
@@ -47,12 +47,21 @@ public class Location {
         this.citta = citta;
     }
 
+    public Evento getEvento() {
+        return evento;
+    }
+
+    public void setEvento(Evento evento) {
+        this.evento = evento;
+    }
+
     @Override
     public String toString() {
         return "Location{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", citta='" + citta + '\'' +
+                ", eventoId='" + (evento != null ? evento.getId() : null) + '\'' +
                 '}';
     }
 }
