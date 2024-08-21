@@ -2,6 +2,7 @@ package dariocecchinato.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -13,17 +14,15 @@ public class Location {
     private String nome;
     private String citta;
 
-    @OneToOne
-    @JoinColumn(name = "id_location", nullable = false, unique = true)
-    private Evento evento;
+    @OneToMany(mappedBy = "location")
+    private List<Evento> eventi;
 
-    public Location(String nome, String citta, Evento evento) {
+    public Location(String nome, String citta) {
         this.nome = nome;
         this.citta = citta;
-        this.evento = evento;
     }
 
-    // Default constructor
+
     public Location() {
     }
 
@@ -47,12 +46,12 @@ public class Location {
         this.citta = citta;
     }
 
-    public Evento getEvento() {
-        return evento;
+    public List<Evento> getEventi() {
+        return eventi;
     }
 
-    public void setEvento(Evento evento) {
-        this.evento = evento;
+    public void setEventi(List<Evento> eventi) {
+        this.eventi = eventi;
     }
 
     @Override
@@ -61,7 +60,6 @@ public class Location {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", citta='" + citta + '\'' +
-                ", eventoId='" + (evento != null ? evento.getId() : null) + '\'' +
                 '}';
     }
 }

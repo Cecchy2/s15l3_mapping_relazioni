@@ -18,7 +18,8 @@ public class Evento {
 
     private String descrizione;
 
-    @OneToOne(mappedBy = "evento")
+    @ManyToOne
+    @JoinColumn(name = "location_id")
     private Location location;
 
     @OneToMany(mappedBy = "evento")
@@ -62,6 +63,14 @@ public class Evento {
         this.dataEvento = dataEvento;
     }
 
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
     public Location getLocation() {
         return location;
     }
@@ -70,12 +79,12 @@ public class Evento {
         this.location = location;
     }
 
-    public String getDescrizione() {
-        return descrizione;
+    public List<Partecipazione> getPartecipazioneList() {
+        return partecipazioneList;
     }
 
-    public void setDescrizione(String descrizione) {
-        this.descrizione = descrizione;
+    public void setPartecipazioneList(List<Partecipazione> partecipazioneList) {
+        this.partecipazioneList = partecipazioneList;
     }
 
     public TipoEvento getTipoEvento() {
@@ -101,7 +110,8 @@ public class Evento {
                 ", titolo='" + titolo + '\'' +
                 ", dataEvento=" + dataEvento +
                 ", descrizione='" + descrizione + '\'' +
-                ", locationId='" + (location != null ? location.getId() : null) + '\'' +
+                ", location=" + location +
+                ", partecipazioneList=" + partecipazioneList +
                 ", tipoEvento=" + tipoEvento +
                 ", numeroMassimoPartecipanti=" + numeroMassimoPartecipanti +
                 '}';

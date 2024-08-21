@@ -3,6 +3,7 @@ package dariocecchinato.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,7 +20,7 @@ public class Persona {
     @Enumerated(EnumType.STRING)
     private Sesso sesso;
     @OneToMany(mappedBy = "persona")
-    private List<Partecipazione> listapartecipazioni;
+    private List<Partecipazione> listapartecipazioni = new ArrayList<>();
 
     public Persona(String nome, String cognome, String email, LocalDate datadinascita, Sesso sesso) {
         this.nome = nome;
@@ -27,7 +28,6 @@ public class Persona {
         this.email = email;
         this.datadinascita = datadinascita;
         this.sesso = sesso;
-        this.listapartecipazioni = listapartecipazioni;
     }
 
     public UUID getId() {
