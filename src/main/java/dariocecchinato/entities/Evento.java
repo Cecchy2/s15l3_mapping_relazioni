@@ -2,6 +2,7 @@ package dariocecchinato.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalTime;
 import java.util.UUID;
 
 @Entity
@@ -12,11 +13,13 @@ public class Evento {
 
     private String titolo;
 
-    private String dataEvento;
+    private LocalTime dataEvento;
 
     private String descrizione;
 
-    private UUID id_location;
+    @OneToOne(mappedBy = "evento")
+    private Location location;
+
 
     @Enumerated(EnumType.STRING)
     private TipoEvento tipoEvento;
@@ -24,10 +27,11 @@ public class Evento {
     private int numeroMassimoPartecipanti;
 
 
-    public Evento(String titolo, String dataEvento, String descrizione, TipoEvento tipoEvento, int numeroMassimoPartecipanti) {
+    public Evento(String titolo, LocalTime dataEvento, String descrizione, Location location, TipoEvento tipoEvento, int numeroMassimoPartecipanti) {
         this.titolo = titolo;
         this.dataEvento = dataEvento;
         this.descrizione = descrizione;
+        this.location = location;
         this.tipoEvento = tipoEvento;
         this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
     }
@@ -47,12 +51,20 @@ public class Evento {
         this.titolo = titolo;
     }
 
-    public String getDataEvento() {
+    public LocalTime getDataEvento() {
         return dataEvento;
     }
 
-    public void setDataEvento(String dataEvento) {
+    public void setDataEvento(LocalTime dataEvento) {
         this.dataEvento = dataEvento;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public String getDescrizione() {
@@ -84,9 +96,9 @@ public class Evento {
         return "Evento{" +
                 "id=" + id +
                 ", titolo='" + titolo + '\'' +
-                ", dataEvento='" + dataEvento + '\'' +
+                ", dataEvento=" + dataEvento +
                 ", descrizione='" + descrizione + '\'' +
-                ", id_location=" + id_location +
+                ", location=" + location +
                 ", tipoEvento=" + tipoEvento +
                 ", numeroMassimoPartecipanti=" + numeroMassimoPartecipanti +
                 '}';
