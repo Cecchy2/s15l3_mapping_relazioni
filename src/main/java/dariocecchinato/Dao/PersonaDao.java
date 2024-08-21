@@ -1,6 +1,6 @@
 package dariocecchinato.Dao;
 
-import dariocecchinato.entities.Evento;
+import dariocecchinato.entities.Persona;
 import dariocecchinato.exeptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -15,7 +15,7 @@ public class PersonaDao {
         this.em = em;
     }
 
-    public void save(Evento persona) {
+    public void save(Persona persona) {
         //1.
         EntityTransaction transaction = em.getTransaction();
         //2.
@@ -25,11 +25,11 @@ public class PersonaDao {
         //4.
         transaction.commit();
 
-        System.out.println("la persona " + persona.getDescrizione() + " è stata creata");
+        System.out.println("la persona " + persona.getNome() + " è stata creata");
     }
 
-    public Evento getById(UUID idPersona) {
-        Evento found = em.find(Evento.class, idPersona);
+    public Persona getById(UUID idPersona) {
+        Persona found = em.find(Persona.class, idPersona);
         if (found == null) {
             throw new NotFoundException(idPersona);
         } else {

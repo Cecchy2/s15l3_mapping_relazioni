@@ -1,6 +1,6 @@
 package dariocecchinato.Dao;
 
-import dariocecchinato.entities.Evento;
+import dariocecchinato.entities.Location;
 import dariocecchinato.exeptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -15,21 +15,17 @@ public class LocationDao {
         this.em = em;
     }
 
-    public void save(Evento location) {
-        //1.
+    public void save(Location location) {
         EntityTransaction transaction = em.getTransaction();
-        //2.
         transaction.begin();
-        //3.
         em.persist(location);
-        //4.
         transaction.commit();
 
-        System.out.println("la location " + location.getDescrizione() + " è stata salvata");
+        System.out.println("La location " + location.getNome() + " è stata salvata");
     }
 
-    public Evento getById(UUID idLocation) {
-        Evento found = em.find(Evento.class, idLocation);
+    public Location getById(UUID idLocation) {
+        Location found = em.find(Location.class, idLocation);
         if (found == null) {
             throw new NotFoundException(idLocation);
         } else {

@@ -1,6 +1,6 @@
 package dariocecchinato.Dao;
 
-import dariocecchinato.entities.Evento;
+import dariocecchinato.entities.Partecipazione;
 import dariocecchinato.exeptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -15,7 +15,7 @@ public class PartecipazioneDao {
         this.em = em;
     }
 
-    public void save(Evento partecipazione) {
+    public void save(Partecipazione partecipazione) {
         //1.
         EntityTransaction transaction = em.getTransaction();
         //2.
@@ -25,11 +25,11 @@ public class PartecipazioneDao {
         //4.
         transaction.commit();
 
-        System.out.println("la partecipazione " + partecipazione.getDescrizione() + " è stata creata");
+        System.out.println("la partecipazione " + partecipazione.getEvento() + " è stata creata");
     }
 
-    public Evento getById(UUID idPartecipazione) {
-        Evento found = em.find(Evento.class, idPartecipazione);
+    public Partecipazione getById(UUID idPartecipazione) {
+        Partecipazione found = em.find(Partecipazione.class, idPartecipazione);
         if (found == null) {
             throw new NotFoundException(idPartecipazione);
         } else {

@@ -2,7 +2,7 @@ package dariocecchinato.entities;
 
 import jakarta.persistence.*;
 
-import java.time.LocalTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,13 +15,13 @@ public class Persona {
     private String cognome;
     private String email;
     @Column(name = "data_di_nascita")
-    private LocalTime datadinascita;
+    private LocalDate datadinascita;
     @Enumerated(EnumType.STRING)
     private Sesso sesso;
     @OneToMany(mappedBy = "persona")
     private List<Partecipazione> listapartecipazioni;
 
-    public Persona(String nome, String cognome, String email, LocalTime datadinascita, Sesso sesso, List<Partecipazione> listapartecipazioni) {
+    public Persona(String nome, String cognome, String email, LocalDate datadinascita, Sesso sesso) {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
@@ -58,11 +58,11 @@ public class Persona {
         this.email = email;
     }
 
-    public LocalTime getDatadinascita() {
+    public LocalDate getDatadinascita() {
         return datadinascita;
     }
 
-    public void setDatadinascita(LocalTime datadinascita) {
+    public void setDatadinascita(LocalDate datadinascita) {
         this.datadinascita = datadinascita;
     }
 
